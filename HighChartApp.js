@@ -36,7 +36,9 @@ var link = new Vue({
                     text: 'Source: Google Analytics'
                 },
 
-                category: 'Month',
+                credits: {
+                    enable: false
+                },
 
                 xAxis: {
                     tickInterval: 7 * 24 * 3600 * 1000, // one week
@@ -125,6 +127,7 @@ var link = new Vue({
             }
             else{
                 $.getJSON(link.myURL, function(data) {
+                    console.log(data)
                       function DownloadJSON2CSV(objArray)
                         {
                             var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
@@ -171,14 +174,19 @@ var link = new Vue({
                             text: 'Source: Google Analytics'
                         },
 
+                        credits: {
+                            enabled: false
+                        },
+
                         xAxis: {
-                            tickInterval: 7 * 24 * 3600 * 1000, // one week
-                            tickWidth: 0,
+                            //tickInterval: 7 * 24 * 3600 * 1000, // one week
+                            // tickWidth: 0,
                             gridLineWidth: 1,
                             labels: {
-                                align: 'left',
-                                x: 3,
-                                y: -3
+                                align: 'right',
+                                x: 16,
+                                y: -3,
+                                format: '{value}'
                             }
                         },
 
@@ -223,7 +231,7 @@ var link = new Vue({
                         plotOptions: {
                             series: {
                                 cursor: 'pointer',
-                                dashStyle: "Dot",
+                                dashStyle: "LongDot",
                                 point: {
                                     events: {
                                         click: function (e) {
@@ -232,7 +240,7 @@ var link = new Vue({
                                                     x: e.pageX || e.clientX,
                                                     y: e.pageY || e.clientY
                                                 },
-                                                headingText: this.series.name + " in " + e.point.month,
+                                                headingText: this.series.name,
                                                 maincontentText:this.y + ' people',
                                                 width: 200
                                             });
