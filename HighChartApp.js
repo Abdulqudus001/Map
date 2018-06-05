@@ -150,6 +150,7 @@ var link = new Vue({
                             return str
                             //window.open( "data:text/csv;charset=utf-8," + escape(str))
                         }
+                    //exports(DownloadJSON2CSV) 
                     var data = DownloadJSON2CSV(data)
                     console.log(data)
                     Highcharts.chart('container', {
