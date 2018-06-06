@@ -2,7 +2,6 @@ var link = new Vue({
     el: "#app",
     data: {
             myURL: "",
-            testURL: "",
             format: "",
             checkFormat: "",
             text: ""
@@ -30,7 +29,7 @@ var link = new Vue({
             this.check();
             if(this.format=="csv"){
                 if(link.checkFormat=='csv'){
-                    Highcharts.chart('container', {
+                    Highcharts.chart('contain', {
                     chart: {
                         scrollablePlotArea: {
                             minWidth: 700
@@ -174,7 +173,7 @@ var link = new Vue({
                             return str
                         }
                     var data = DownloadJSON2CSV(data)
-                    Highcharts.chart('container', {
+                    Highcharts.chart('contain', {
                         data:{
                             csv: data
                         },
