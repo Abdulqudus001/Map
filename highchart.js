@@ -52,35 +52,62 @@ var link = new Vue({
         addUrl(){
             this.url.push(this.myURL)
             if(this.format=="csv"){
-               console.log("heheheh") 
+               console.log("heheheh")
+               Highcharts.mapChart('container', {
+                    chart: {
+                        map: 'countries/ng/ng-all'
+                    },
+
+                    
+                data: {
+                    csvURL: link.myURL,
+                    beforeParse: function (csv) {
+                        return csv.replace(/\n\n/g, '\n');
+                    }
+                    
+                },
+
+                    credits: {
+                        enabled: false
+                    },
+
+                    title: {
+                        text: 'Map of Nigeria showing population growth'
+                    },
+
+                    subtitle: {
+                        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
+                    },
+
+                    mapNavigation: {
+                        enabled: true,
+                        buttonOptions: {
+                            verticalAlign: 'bottom'
+                        }
+                    },
+
+                    colorAxis: {
+                        min: 0
+                    },
+
+                    series: [{
+                        //data: data,
+                        //joinBy: ['hc-key'],
+                        name: 'Population',
+                        states: {
+                            hover: {
+                                color: '#fff'
+                            }
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }]
+                }); 
             }
             else{
                 $.getJSON('https://rawgit.com/Abdulqudus001/Map/master/highmapData.json', function(data) {
-                          function DownloadJSON2CSV(objArray)
-                            {
-                                var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-
-                                var str = '';
-
-                                for (var i = 0; i < array.length; i++) {
-                                    var line = '';
-
-                                    for (var index in array[i]) {
-                                        line += array[i][index] + ',';
-                                    }
-
-                                    // Here is an example where you would wrap the values in double quotes
-                                    // for (var index in array[i]) {
-                                    //    line += '"' + array[i][index] + '",';
-                                    // }
-
-                                    line.slice(0,line.Length-1); 
-
-                                    str += line + '\r\n';
-                                }
-                                return str
-                                //window.open( "data:text/csv;charset=utf-8," + escape(str))
-                            }
                         //var data = DownloadJSON2CSV(data)
                         console.log(data)
 
@@ -118,6 +145,7 @@ var link = new Vue({
 
                     series: [{
                         data: data,
+                        value: "Population",
                         joinBy: ['hc-key', 'State'],
                         name: 'Population',
                         states: {
@@ -132,7 +160,6 @@ var link = new Vue({
                     }]
                 });
                 })
-            console.log(data)
             }
         }
     }
