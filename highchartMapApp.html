@@ -52,6 +52,19 @@
 							<div>{{text}}</div>
 						</div>
 					</div>
+					<label for="select">Choose category</label>
+					<select name="select" v-model="category">
+						<option>ANC coverage atleast 1 week</option>
+						<option>ANC coverage atleast 4 weeks</option>
+					</select>
+					<label for="year">Select year</label>
+					<select name="year" v-model="year">
+						<option>2000</option>
+						<option>2001</option>
+						<option>2002</option>
+						<option>2003</option>
+					</select>
+					<p>{{category}}</p>
 				</div>
 				<script src="./highchartMapApp.js"></script>
 			</div>

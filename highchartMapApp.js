@@ -8,7 +8,9 @@ var link = new Vue({
             myURL: "",
             format: "",
             checkFormat: "",
-            text: ""
+            text: "",
+            category: "",
+            year: ""
     },
     methods: {
         check(){
@@ -68,8 +70,14 @@ var link = new Vue({
                     url: link.myURL,
                     dataType: "text",
                     success: function(data) {
-                        console.log(csvJSON1(data))
-                        Highcharts.mapChart('contain', {
+                        var plot = csvJSON1(data)
+                        if(link.category=="ANC coverage atleast 1 week"){
+                            for(var i=0;i<plot.length;i++){
+                            plot[i].value = plot[i].IHME_1_visits_2000
+                            delete(plot[i].IHME_4_visits_2000)
+                            delete(plot[i].IHME_1_visits_2000)
+                            }
+                            Highcharts.mapChart('contain', {
                             chart: {
                                 map: 'countries/ng/ng-all'
                             },
@@ -103,7 +111,7 @@ var link = new Vue({
                             },
 
                             series: [{
-                                data: csvJSON1(data),
+                                data: plot,
                                 joinBy: ['hc-key',"State"],
                                 name: 'Population',
                                 states: {
@@ -116,17 +124,80 @@ var link = new Vue({
                                     format: '{point.name}'
                                 }
                             }]
-                        }); 
+                            });   
+                        }
+                        else if(link.category=="ANC coverage atleast 4 weeks"){
+                            for(var i=0;i<plot.length;i++){
+                            plot[i].value = plot[i].IHME_4_visits_2000
+                            delete(plot[i].IHME_4_visits_2000)
+                            delete(plot[i].IHME_1_visits_2000)
+                            }
+                            Highcharts.mapChart('contain', {
+                            chart: {
+                                map: 'countries/ng/ng-all'
+                            },
+
+                            credits: {
+                                enabled: false
+                            },
+
+                            title: {
+                                text: 'Map of Nigeria showing population growth'
+                            },
+
+                            subtitle: {
+                                text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
+                            },
+
+                            mapNavigation: {
+                                enabled: true,
+                                buttonOptions: {
+                                    verticalAlign: 'bottom'
+                                }
+                            },
+
+                            colorAxis: {
+                                //min: 0
+                                min: 1,
+                                max: 100,
+                                //type: 'logarithmic',
+                                minColor: '#efecf3',
+                                maxColor: '#990041'
+                            },
+
+                            series: [{
+                                data: plot,
+                                joinBy: ['hc-key',"State"],
+                                name: 'Population',
+                                states: {
+                                    hover: {
+                                        color: '#fff'
+                                    }
+                                },
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '{point.name}'
+                                }
+                            }]
+                            })
+                        }
+                         
                         //processData(data);
                     }
                 });
             }
             else{
                 $.getJSON(link.myURL, function(data) {
+                    var plot = data;
                         //var data = DownloadJSON2CSV(data)
-                        for(var i=0;i<data.length;i++)
-                            console.log(data[i].value)
-                Highcharts.mapChart('contain', {
+                if(link.category=="ANC coverage atleast 1 week"){
+                    for(var i=0;i<plot.length;i++){
+                            plot[i].value = plot[i].IHME_1_visits_2000
+                            delete(plot[i].IHME_4_visits_2000)
+                            delete(plot[i].IHME_1_visits_2000)
+                    }
+                    console.log(plot)
+                    Highcharts.mapChart('contain', {
                     chart: {
                         map: 'countries/ng/ng-all'
                     },
@@ -159,7 +230,7 @@ var link = new Vue({
                     },
 
                     series: [{
-                        data: data,
+                        data: plot,
                         value: "Population",
                         joinBy: ['hc-key', 'State'],
                         name: 'Population',
@@ -173,7 +244,64 @@ var link = new Vue({
                             format: '{point.name}'
                         }
                     }]
-                });
+                    });
+                }
+                else if(link.category=="ANC coverage atleast 4 weeks"){
+                    for(var i=0;i<plot.length;i++){
+                            plot[i].value = plot[i].IHME_4_visits_2000
+                            delete(plot[i].IHME_4_visits_2000)
+                            delete(plot[i].IHME_1_visits_2000)
+                            }
+                    Highcharts.mapChart('contain', {
+                    chart: {
+                        map: 'countries/ng/ng-all'
+                    },
+
+                    credits: {
+                        enabled: false
+                    },
+
+                    title: {
+                        text: 'Map of Nigeria showing population growth'
+                    },
+
+                    subtitle: {
+                        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
+                    },
+
+                    mapNavigation: {
+                        enabled: true,
+                        buttonOptions: {
+                            verticalAlign: 'bottom'
+                        }
+                    },
+
+                    colorAxis: {
+                        min: 1,
+                        max: 100,
+                        //type: 'logarithmic',
+                        minColor: '#efecf3',
+                        maxColor: '#990041'
+                    },
+
+                    series: [{
+                        data: plot,
+                        value: "Population",
+                        joinBy: ['hc-key', 'State'],
+                        name: 'Population',
+                        states: {
+                            hover: {
+                                color: '#fff'
+                            }
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }]
+                    });
+                }
+                
                 })
             }
         }
