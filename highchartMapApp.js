@@ -71,7 +71,7 @@ var link = new Vue({
                     dataType: "text",
                     success: function(data) {
                         var plot = csvJSON1(data)
-                        if(link.category=="ANC coverage atleast 1 week"){
+                        if(link.category=="ANC coverage atleast 1 week" && link.year=="2000"){
                             for(var i=0;i<plot.length;i++){
                             plot[i].value = plot[i].IHME_1_visits_2000
                             delete(plot[i].IHME_4_visits_2000)
@@ -111,7 +111,7 @@ var link = new Vue({
                             },
 
                             series: [{
-                                data: plot,
+                                //data: plot,
                                 joinBy: ['hc-key',"State"],
                                 name: 'Population',
                                 states: {
@@ -126,7 +126,7 @@ var link = new Vue({
                             }]
                             });   
                         }
-                        else if(link.category=="ANC coverage atleast 4 weeks"){
+                        else if(link.category=="ANC coverage atleast 4 weeks" && link.year=="2000"){
                             for(var i=0;i<plot.length;i++){
                             plot[i].value = plot[i].IHME_4_visits_2000
                             delete(plot[i].IHME_4_visits_2000)
@@ -190,7 +190,7 @@ var link = new Vue({
                 $.getJSON(link.myURL, function(data) {
                     var plot = data;
                         //var data = DownloadJSON2CSV(data)
-                if(link.category=="ANC coverage atleast 1 week"){
+                if(link.category=="ANC coverage atleast 1 week" && link.year == "2000"){
                     for(var i=0;i<plot.length;i++){
                             plot[i].value = plot[i].IHME_1_visits_2000
                             delete(plot[i].IHME_4_visits_2000)
@@ -246,11 +246,67 @@ var link = new Vue({
                     }]
                     });
                 }
-                else if(link.category=="ANC coverage atleast 4 weeks"){
+                else if(link.category=="ANC coverage atleast 4 weeks" && link.year=="2000"){
                     for(var i=0;i<plot.length;i++){
                             plot[i].value = plot[i].IHME_4_visits_2000
                             delete(plot[i].IHME_4_visits_2000)
                             delete(plot[i].IHME_1_visits_2000)
+                            }
+                    Highcharts.mapChart('contain', {
+                    chart: {
+                        map: 'countries/ng/ng-all'
+                    },
+
+                    credits: {
+                        enabled: false
+                    },
+
+                    title: {
+                        text: 'Map of Nigeria showing population growth'
+                    },
+
+                    subtitle: {
+                        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
+                    },
+
+                    mapNavigation: {
+                        enabled: true,
+                        buttonOptions: {
+                            verticalAlign: 'bottom'
+                        }
+                    },
+
+                    colorAxis: {
+                        min: 1,
+                        max: 100,
+                        //type: 'logarithmic',
+                        minColor: '#efecf3',
+                        maxColor: '#990041'
+                    },
+
+                    series: [{
+                        data: plot,
+                        value: "Population",
+                        joinBy: ['hc-key', 'State'],
+                        name: 'Population',
+                        states: {
+                            hover: {
+                                color: '#fff'
+                            }
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }]
+                    });
+                }
+                else if(link.category=="ANC coverage atleast 4 weeks" && link.year=="2001"){
+                    for(var i=0;i<plot.length;i++){
+                            plot[i].value = plot[i].IHME_4_visits_2001
+                            delete(plot[i].IHME_4_visits_2000)
+                            delete(plot[i].IHME_1_visits_2000)
+                            delete(plot[i].IHME_1_visits_2001)
                             }
                     Highcharts.mapChart('contain', {
                     chart: {

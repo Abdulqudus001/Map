@@ -27,14 +27,13 @@
 					<label for="CSV">CSV</label>
 					<input type="radio" value="csv" v-model="format" @click="check" name="format" required="">
 					<input type="textfield" v-model="myURL" @input="checkUrl" required="">
-					<button @click="addUrl" >Plot Graph</button>
 					<div v-if="checkFormat && format">
 						<div v-if="checkFormat==='csv' && format==='csv'">
-							<div id="contain" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							<div id="contain" style="width: 400px; height: 400px; margin: 0 auto"></div>
 						</div>
 
 						<div v-if="checkFormat==='json' && format==='json'">
-							<div id="contain" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							<div id="contain" style="width: 400px; height: 400px; margin: 0 auto"></div>
 						</div>
 					</div>
 					<div v-if="text">
@@ -53,18 +52,18 @@
 						</div>
 					</div>
 					<label for="select">Choose category</label>
-					<select name="select" v-model="category">
+					<select name="select" v-model="category" @change="addUrl">
 						<option>ANC coverage atleast 1 week</option>
 						<option>ANC coverage atleast 4 weeks</option>
 					</select>
 					<label for="year">Select year</label>
-					<select name="year" v-model="year">
+					<select name="year" v-model="year" @change="addUrl">
 						<option>2000</option>
 						<option>2001</option>
 						<option>2002</option>
 						<option>2003</option>
-					</select>
-					<p>{{category}}</p>
+					</select><br>
+					<button @click="addUrl" >Plot Graph</button>
 				</div>
 				<script src="./highchartMapApp.js"></script>
 			</div>
