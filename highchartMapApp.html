@@ -53,8 +53,123 @@
 					</div>
 					<label for="select">Choose category</label>
 					<select name="select" v-model="category" @change="addUrl">
-						<option>ANC coverage atleast 1 week</option>
-						<option>ANC coverage atleast 4 weeks</option>
+						<option>ANC Coverage (4 visits) -> IHME</option>
+						<option>ANC Coverage (4 visits) -> MICS</option>
+						<option>ANC Coverage (4 visits) -> NDHS</option>
+						<option>ANC Coverage (4 visits) -> NHMIS</option>
+						<option>ANC Coverage (4 visits) -> NNHS</option>
+						<option>ANC Coverage (at least 1 visit) -> IHME</option>
+						<option>ANC Coverage (at least 1 visit) -> MICS</option>
+						<option>ANC Coverage (at least 1 visit) -> NARHS</option>
+						<option>ANC Coverage (at least 1 visit) -> NDHS</option>
+						<option>ANC Coverage (at least 1 visit) -> NHMIS</option>
+						<option>ANC Coverage (at least 1 visit) -> NNHS</option>
+						<option>Adolescent Fertility rate -> NHMIS</option>
+						<option>Adolescent Fertility rate -> MICS</option>
+						<option>Adolescent Fertility rate -> NDHS</option>
+						<option>Adolescent Fertility rate -> World Bank</option>
+						<option>Contraceptive prevalence rate -> MICS</option>
+						<option>Contraceptive prevalence rate -> NDHS</option>
+						<option>Contraceptive prevalence rate -> NHMIS</option>
+						<option>Contraceptive prevalence rate -> NNHS</option>
+						<option>Contraceptive prevalence rate -> WHO</option>
+						<option>Contraceptive prevalence rate -> World Bank</option>
+						<option>Infant Mortality rate -> NDHS</option>
+						<option>Infant Mortality rate -> MICS</option>
+						<option>Infant Mortality rate -> NHMIS</option>
+						<option>Infant Mortality rate -> WHO</option>
+						<option>Infant Mortality rate -> World Bank</option>
+						<option>Maternal Mortality Ratio -> NDHS</option>
+						<option>Maternal Mortality Ratio -> NHMIS</option>
+						<option>Maternal Mortality Ratio -> WHO</option>
+						<option>Maternal Mortality Ratio -> World Bank</option>
+						<option>Measles Immunization Coverage -> IHME</option>
+						<option>Measles Immunization Coverage -> MICS</option>
+						<option>Measles Immunization Coverage -> NDHS</option>
+						<option>Measles Immunization Coverage -> NHMIS</option>
+						<option>Measles Immunization Coverage -> NNHS</option>
+						<option>Immunization Coverage -> WHO"</option>
+						<option>Measles Immunization Coverage -> World Bank</option>
+						<option>Neonatal mortality rate (per 1000 live births) -> MICS</option>
+						<option>Neonatal mortality rate (per 1000 live births) -> NDHS</option>
+						<option>Neonatal mortality rate (per 1000 live births) -> NHMIS</option>
+						<option>Percentage of children fully immunized against childhood diseases by age 1 -> MICS</option>
+						<option>Percentage of children fully immunized against childhood diseases by age 1 -> NDHS</option>
+						<option>Percentage of children fully immunized against childhood diseases by age 1 -> NHMIS</option>
+						<option>Percentage of children under 5 with fever who received ACT -> IHME</option>
+						<option>Percentage of children under 5 with fever who received ACT -> MICS</option>
+						<option>Percentage of children under 5 with fever who received ACT -> NDHS</option>
+						<option>Percentage of children under 5 with fever who received ACT -> NHMIS</option>
+						<option>Percentage of children under 5 with fever who received ACT -> NMIS</option>
+						<option>Percentage of children under 6 months who were exclusively breastfed -> IHME</option>
+						<option>Percentage of children under 6 months who were exclusively breastfed -> NHMIS</option>
+						<option>Percentage of children under 6 months who were exclusively breastfed -> MICS</option>
+						<option>Percentage of children under 6 months who were exclusively breastfed -> NNHS</option>
+						<option>Percentage of children under 6 months who were exclusively breastfed -> WHO</option>
+						<option>Percentage of children under 6 months who were exclusively breastfed -> World Bank</option>
+						<option>Percentage of children with diarrhoea who received treatment -> MICS</option>
+						<option>Percentage of children with diarrhoea who received treatment -> NHMIS</option>
+						<option>Percentage of children with diarrhoea who received treatment -> NDHS</option>
+						<option>Percentage of children with diarrhoea who received treatment -> NNHS</option>
+						<option>Percentage of children with diarrhoea who received treatment -> WHO</option>
+						<option>Percentage of people age 15-49 years who have been tested for HIV and know their results -> MICS</option>
+						<option>Percentage of people age 15-49 years who have been tested for HIV and know their results -> NHMIS</option>
+						<option>Percentage of people age 15-49 years who have been tested for HIV and know their results -> NARHS</option>
+						<option>Percentage of people age 15-49 years who have been tested for HIV and know their results -> NDHS</option>
+						<option>Percentage of pregnant women tested for HIV during antenatal care -> MICS</option>
+						<option>Percentage of pregnant women tested for HIV during antenatal care -> NHMIS</option>
+						<option>Percentage of pregnant women tested for HIV during antenatal care -> NARHS</option>
+						<option>Percentage of pregnant women tested for HIV during antenatal care -> NDHS</option>
+						<option>Percentage of pregnant women tested for HIV during antenatal care -> NNHS</option>
+						<option>Percentage of women age 15-49 years who received at least one IPT dose during pregnancy -> MICS</option>
+						<option>Percentage of women age 15-49 years who received at least one IPT dose during pregnancy -> NHMIS</option>
+						<option>Percentage of women age 15-49 years who received at least one IPT dose during pregnancy -> NDHS</option>
+						<option>Percentage of women age 15-49 years who received at least one IPT dose during pregnancy -> NMIS</option>
+						<option>Percentage of women age 15-49 years who received at least one IPT dose during pregnancy -> NNHS</option>
+						<option>Percentage of women age 15-49 years who received at least two or more IPT doses during pregnancy -> IHME</option>
+						<option>Percentage of women age 15-49 years who received at least two or more IPT doses during pregnancy -> MICS</option>
+						<option>Percentage of women age 15-49 years who received at least two or more IPT doses during pregnancy -> NDHS</option>
+						<option>Percentage of women age 15-49 years who received at least two or more IPT doses during pregnancy -> NHMIS</option>
+						<option>Percentage of women age 15-49 years who received at least two or more IPT doses during pregnancy -> NMIS</option>
+						<option>Prevalence of Diarrhoea -> MICS</option>
+						<option>Prevalence of Diarrhoea -> NHMIS</option>
+						<option>Prevalence of Diarrhoea -> NDHS</option>
+						<option>Prevalence of Diarrhoea -> NNHS</option>
+						<option>Prevalence of HIV -> NARHS</option>
+						<option>Prevalence of HIV -> NHMIS</option>
+						<option> Prevalence of HIV -> WHO</option>
+						<option>Prevalence of HIV -> World Bank</option>
+						<option>Prevalence of Symptoms of Acute Respiratory Infection among under five children -> MICS</option>
+						<option>Prevalence of Symptoms of Acute Respiratory Infection among under five children -> NHMIS</option>
+						<option>Prevalence of Symptoms of Acute Respiratory Infection among under five children -> NDHS</option>
+						<option>Prevalence of Symptoms of Acute Respiratory Infection among under five children -> NNHS</option>
+						<option>Prevalence of malaria among under five children (miscroscopy positive) -> NMIS</option>
+						<option>Prevalence of malaria among under five children (miscroscopy positive) -> NHMIS</option>
+						<option>Skilled attendance at delivery or birth -> IHME</option>
+						<option>Skilled attendance at delivery or birth -> MICS</option>
+						<option>Skilled attendance at delivery or birth -> NARHS</option>
+						<option>Skilled attendance at delivery or birth -> NDHS</option>
+						<option>Skilled attendance at delivery or birth -> NHMIS</option>
+						<option>Skilled attendance at delivery or birth -> NNHS</option>
+						<option>Total fertility rate -> MICS</option>
+						<option>Total fertility rate -> NDHS</option>
+						<option>Total fertility rate -> NHMIS</option>
+						<option>Total fertility rate -> World Bank</option>
+						<option>Under 5 Mortality rate -> IHME</option>
+						<option>Under 5 Mortality rate -> MICS</option>
+						<option>Under 5 Mortality rate -> NDHS</option>
+						<option>Under 5 Mortality rate -> NHMIS</option>
+						<option>Under 5 Mortality rate -> WHO</option>
+						<option>Under 5 Mortality rate -> World Bank</option>
+						<option>Underweight Rate -> IHME</option>
+						<option>Underweight Rate -> MICS</option>
+						<option>Underweight Rate -> NDHS</option>
+						<option>Underweight Rate -> NHMIS</option>
+						<option>Underweight Rate -> NNHS</option>
+						<option>Underweight Rate -> World Bank</option>
+						<option>Unmet need for family planning -> MICS</option>
+						<option>Unmet need for family planning -> NHMIS</option>
+						<option>Unmet need for family planning -> NDHS</option>
 					</select>
 					<label for="year">Select year</label>
 					<select name="year" v-model="year" @change="addUrl">
@@ -62,6 +177,20 @@
 						<option>2001</option>
 						<option>2002</option>
 						<option>2003</option>
+						<option>2004</option>
+						<option>2005</option>
+						<option>2006</option>
+						<option>2007</option>
+						<option>2008</option>
+						<option>2009</option>
+						<option>2010</option>
+						<option>2011</option>
+						<option>2012</option>
+						<option>2013</option>
+						<option>2014</option>
+						<option>2015</option>
+						<option>2016</option>
+						<option>2017</option>
 					</select><br>
 					<button @click="addUrl" >Plot Graph</button>
 				</div>
