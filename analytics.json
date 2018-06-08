@@ -1,0 +1,68 @@
+[
+
+	{
+		"Month": "Month",
+		"Tokyo": "Tokyo",
+		"London": "London"
+	},
+	{
+		"Month": "Jan",
+		"Tokyo": "40585",
+		"London": "48351"
+	},
+	{
+		"Month": "Feb",
+		"Tokyo": "43039",
+		"London": "51499"
+	},
+	{
+		"Month": "Mar",
+		"Tokyo": "44926",
+		"London": "53359"
+	},
+	{
+		"Month": "Apr",
+		"Tokyo": "41256",
+		"London": "49018"
+	},
+	{
+		"Month": "May",
+		"Tokyo": "36844",
+		"London": "43332"
+	},
+	{
+		"Month": "Jun",
+		"Tokyo": "28955",
+		"London": "33419"
+	},
+	{
+		"Month": "Jul",
+		"Tokyo": "26113",
+		"London": "30020"
+	},
+	{
+		"Month": "Aug",
+		"Tokyo": "28433",
+		"London": "33183"
+	},
+	{
+		"Month": "Sep",
+		"Tokyo": "32687",
+		"London": "38782"
+	},
+	{
+		"Month": "Oct",
+		"Tokyo": "35689",
+		"London": "42566"
+	},
+	{
+		"Month": "Nov",
+		"Tokyo": "33656",
+		"London": "39972"
+	},
+	{
+		"Month": "Dec",
+		"Tokyo": "34559",
+		"London": "40414"
+	}
+]

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+	<!-- <script src="http://code.highcharts.com/maps/modules/map.js"></script> -->
+	<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+	<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/mapdata/countries/ng/ng-all.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="vue/dist/vue.min.js"></script>
+	<script src="https://www.highcharts.com/media/com_demo/js/highslide-full.min.js"></script>
+	<script src="https://www.highcharts.com/media/com_demo/js/highslide.config.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="https://www.highcharts.com/media/com_demo/css/highslide.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+	<div id="container">
+		<body>
+			<div class="jumbotron">
+				<div id="app">
+					<label for="JSON">JSON</label>
+					<input type="radio" value="json" v-model="format" @click="check" name="format" required="">
+					<label for="CSV">CSV</label>
+					<input type="radio" value="csv" v-model="format" @click="check" name="format" required="">
+					<input type="textfield" v-model="myURL" @input="checkUrl" required="">
+					<div v-if="checkFormat && format">
+						<div v-if="checkFormat==='csv' && format==='csv'">
+							<div id="contain" style="width: 400px; height: 400px; margin: 0 auto"></div>
+						</div>
+
+						<div v-if="checkFormat==='json' && format==='json'">
+							<div id="contain" style="width: 400px; height: 400px; margin: 0 auto"></div>
+						</div>
+					</div>
+					<div v-if="text">
+						<div v-if="text ==='Please fill all required fields'">
+							<div class="alert alert-warning alert-dismissable" role="alert">
+								<div>
+									<p>{{text}}</p>
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+							</div>
+						</div>
+						<div v-else>
+							<div>{{text}}</div>
+						</div>
+					</div>
+					<label for="select">Choose category</label>
+					<select name="select" v-model="category" @change="addUrl">
+						<option>ANC coverage atleast 1 week</option>
+						<option>ANC coverage atleast 4 weeks</option>
+					</select>
+					<label for="year">Select year</label>
+					<select name="year" v-model="year" @change="addUrl">
+						<option>2000</option>
+						<option>2001</option>
+						<option>2002</option>
+						<option>2003</option>
+					</select><br>
+					<button @click="addUrl" >Plot Graph</button>
+				</div>
+				<script src="./highchartMapApp.js"></script>
+			</div>
+		</body>
+	</div>
+</html>
+
