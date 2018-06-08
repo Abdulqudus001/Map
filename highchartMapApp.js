@@ -70,293 +70,212 @@ var link = new Vue({
                     url: link.myURL,
                     dataType: "text",
                     success: function(data) {
-                        var plot = csvJSON1(data)
-                        if(link.category=="ANC coverage atleast 1 week" && link.year=="2000"){
-                            for(var i=0;i<plot.length;i++){
-                            plot[i].value = plot[i].IHME_1_visits_2000
-                            delete(plot[i].IHME_4_visits_2000)
-                            delete(plot[i].IHME_1_visits_2000)
-                            }
-                            Highcharts.mapChart('contain', {
-                            chart: {
-                                map: 'countries/ng/ng-all'
-                            },
-
-                            credits: {
-                                enabled: false
-                            },
-
-                            title: {
-                                text: 'Map of Nigeria showing population growth'
-                            },
-
-                            subtitle: {
-                                text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
-                            },
-
-                            mapNavigation: {
-                                enabled: true,
-                                buttonOptions: {
-                                    verticalAlign: 'bottom'
-                                }
-                            },
-
-                            colorAxis: {
-                                //min: 0
-                                min: 1,
-                                max: 100,
-                                //type: 'logarithmic',
-                                minColor: '#efecf3',
-                                maxColor: '#990041'
-                            },
-
-                            series: [{
-                                //data: plot,
-                                joinBy: ['hc-key',"State"],
-                                name: link.category+ " in the year " + link.year,
-                                states: {
-                                    hover: {
-                                        color: '#fff'
-                                    }
-                                },
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '{point.name}'
-                                }
-                            }]
-                            });   
-                        }
-                        else if(link.category=="ANC coverage atleast 4 weeks" && link.year=="2000"){
-                            for(var i=0;i<plot.length;i++){
-                            plot[i].value = plot[i].IHME_4_visits_2000
-                            delete(plot[i].IHME_4_visits_2000)
-                            delete(plot[i].IHME_1_visits_2000)
-                            }
-                            Highcharts.mapChart('contain', {
-                            chart: {
-                                map: 'countries/ng/ng-all'
-                            },
-
-                            credits: {
-                                enabled: false
-                            },
-
-                            title: {
-                                text: 'Map of Nigeria showing population growth'
-                            },
-
-                            subtitle: {
-                                text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
-                            },
-
-                            mapNavigation: {
-                                enabled: true,
-                                buttonOptions: {
-                                    verticalAlign: 'bottom'
-                                }
-                            },
-
-                            colorAxis: {
-                                //min: 0
-                                min: 1,
-                                max: 100,
-                                //type: 'logarithmic',
-                                minColor: '#efecf3',
-                                maxColor: '#990041'
-                            },
-
-                            series: [{
-                                data: plot,
-                                joinBy: ['hc-key',"State"],
-                                name: link.category+ " in the year " + link.year,
-                                states: {
-                                    hover: {
-                                        color: '#fff'
-                                    }
-                                },
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '{point.name}'
-                                }
-                            }]
+                        var plot = csvJSON1(data);
+                        if(link.category !=="" && link.year !== ""){
+                            var states = []
+                            var val = []
+                            var test = $.grep(plot,function(n){
+                                return n.Period==link.year
                             })
+
+                            var test1 = $.grep(test,function(m){
+                                return m.State!=="National"
+                            })
+                            var test2 = $.grep(test1,function(m){
+                                return m.State!=="North-Central"
+                            })
+                            var test3 = $.grep(test2,function(m){
+                                return m.State!=="North-West"
+                            })
+                            var test4 = $.grep(test3,function(m){
+                                return m.State!=="North-East"
+                            })
+                            var test5 = $.grep(test4,function(m){
+                                return m.State!=="South-West"
+                            })
+                            var test6 = $.grep(test5,function(m){
+                                return m.State!=="South-South"
+                            })
+                            var test7 = $.grep(test6,function(m){
+                                return m.State!=="South-East"
+                            })
+
+                            x = link.category
+                            var value = "value",
+                            state = "state"
+                            test7.forEach(function(element){
+                                val.push(element[x])
+                                states.push(element.State)
+                            })
+                            
+                            var set=[]
+
+                            for(i=0;i<val.length;i++){
+                                states[14]="Federal Capital Territory"
+                                states[25]="Nassarawa"
+                                var newSet = {
+                                    "State": states[i],
+                                    "value": val[i]
+                                }
+                                set.push(newSet)
+                            }
+                            console.log(set)
+
+                            Highcharts.mapChart('contain', {
+                                chart: {
+                                    map: 'countries/ng/ng-all'
+                                },
+
+                                credits: {
+                                    enabled: false
+                                },
+
+                                title: {
+                                    text: 'Map of Nigeria showing population growth'
+                                },
+
+                                subtitle: {
+                                    text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
+                                },
+
+                                mapNavigation: {
+                                    enabled: true,
+                                    buttonOptions: {
+                                        verticalAlign: 'bottom'
+                                    }
+                                },
+
+                                colorAxis: {
+                                    min: 1,
+                                    max: 100,
+                                    //type: 'logarithmic',
+                                    minColor: '#efecf3',
+                                    maxColor: '#990041'
+                                },
+
+                                series: [{
+                                    data: set,
+                                    value: "Population",
+                                    joinBy: ['name', 'State'],
+                                    name: link.category+ " in the year " + link.year,
+                                    states: {
+                                        hover: {
+                                            color: '#fff'
+                                        }
+                                    },
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '{point.name}'
+                                    }
+                                }]
+                            });
                         }
-                         
-                        //processData(data);
+                        
                     }
                 });
             }
             else{
                 $.getJSON(link.myURL, function(data) {
                     var plot = data;
-                        //var data = DownloadJSON2CSV(data)
-                if(link.category=="ANC coverage atleast 1 week" && link.year == "2000"){
-                    for(var i=0;i<plot.length;i++){
-                            plot[i].value = plot[i].IHME_1_visits_2000
-                            delete(plot[i].IHME_4_visits_2000)
-                            delete(plot[i].IHME_1_visits_2000)
+                    if(link.category !=="" && link.year !== ""){
+                            var states = []
+                            var val = []
+                            var test = $.grep(plot,function(n){
+                                return n.Period==link.year
+                            })
+
+                            var test1 = $.grep(test,function(m){
+                                return m.State!=="National"
+                            })
+                            var test2 = $.grep(test1,function(m){
+                                return m.State!=="North-Central"
+                            })
+                            var test3 = $.grep(test2,function(m){
+                                return m.State!=="North-West"
+                            })
+                            var test4 = $.grep(test3,function(m){
+                                return m.State!=="North-East"
+                            })
+                            var test5 = $.grep(test4,function(m){
+                                return m.State!=="South-West"
+                            })
+                            var test6 = $.grep(test5,function(m){
+                                return m.State!=="South-South"
+                            })
+                            var test7 = $.grep(test6,function(m){
+                                return m.State!=="South-East"
+                            })
+
+                            x = link.category
+                            var value = "value",
+                            state = "state"
+                            test7.forEach(function(element){
+                                val.push(element[x])
+                                states.push(element.State)
+                            })
+                            
+                            var set=[]
+
+                            for(i=0;i<val.length;i++){
+                                states[14]="Federal Capital Territory"
+                                states[25]="Nassarawa"
+                                var newSet = {
+                                    "State": states[i],
+                                    "value": val[i]
+                                }
+                                set.push(newSet)
+                            }
+                            console.log(set)
+
+                        Highcharts.mapChart('contain', {
+                        chart: {
+                            map: 'countries/ng/ng-all'
+                        },
+
+                        credits: {
+                            enabled: false
+                        },
+
+                        title: {
+                            text: 'Map of Nigeria showing population growth'
+                        },
+
+                        subtitle: {
+                            text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
+                        },
+
+                        mapNavigation: {
+                            enabled: true,
+                            buttonOptions: {
+                                verticalAlign: 'bottom'
+                            }
+                        },
+
+                        colorAxis: {
+                            min: 1,
+                            max: 100,
+                            //type: 'logarithmic',
+                            minColor: '#efecf3',
+                            maxColor: '#990041'
+                        },
+
+                        series: [{
+                            data: set,
+                            value: "Population",
+                            joinBy: ['name', 'State'],
+                            name: link.category+ " in the year " + link.year,
+                            states: {
+                                hover: {
+                                    color: '#fff'
+                                }
+                            },
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}'
+                            }
+                        }]
+                        });
                     }
-                    console.log(plot)
-                    Highcharts.mapChart('contain', {
-                    chart: {
-                        map: 'countries/ng/ng-all'
-                    },
-
-                    credits: {
-                        enabled: false
-                    },
-
-                    title: {
-                        text: 'Map of Nigeria showing population growth'
-                    },
-
-                    subtitle: {
-                        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
-                    },
-
-                    mapNavigation: {
-                        enabled: true,
-                        buttonOptions: {
-                            verticalAlign: 'bottom'
-                        }
-                    },
-
-                    colorAxis: {
-                        min: 1,
-                        max: 100,
-                        //type: 'logarithmic',
-                        minColor: '#efecf3',
-                        maxColor: '#990041'
-                    },
-
-                    series: [{
-                        data: plot,
-                        value: "Population",
-                        joinBy: ['hc-key', 'State'],
-                        name: link.category+ " in the year " + link.year,
-                        states: {
-                            hover: {
-                                color: '#fff'
-                            }
-                        },
-                        dataLabels: {
-                            enabled: true,
-                            format: '{point.name}'
-                        }
-                    }]
-                    });
-                }
-                else if(link.category=="ANC coverage atleast 4 weeks" && link.year=="2000"){
-                    for(var i=0;i<plot.length;i++){
-                            plot[i].value = plot[i].IHME_4_visits_2000
-                            delete(plot[i].IHME_4_visits_2000)
-                            delete(plot[i].IHME_1_visits_2000)
-                            }
-                    Highcharts.mapChart('contain', {
-                    chart: {
-                        map: 'countries/ng/ng-all'
-                    },
-
-                    credits: {
-                        enabled: false
-                    },
-
-                    title: {
-                        text: 'Map of Nigeria showing population growth'
-                    },
-
-                    subtitle: {
-                        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
-                    },
-
-                    mapNavigation: {
-                        enabled: true,
-                        buttonOptions: {
-                            verticalAlign: 'bottom'
-                        }
-                    },
-
-                    colorAxis: {
-                        min: 1,
-                        max: 100,
-                        //type: 'logarithmic',
-                        minColor: '#efecf3',
-                        maxColor: '#990041'
-                    },
-
-                    series: [{
-                        data: plot,
-                        value: "Population",
-                        joinBy: ['hc-key', 'State'],
-                        name: link.category+ " in the year " + link.year,
-                        states: {
-                            hover: {
-                                color: '#fff'
-                            }
-                        },
-                        dataLabels: {
-                            enabled: true,
-                            format: '{point.name}'
-                        }
-                    }]
-                    });
-                }
-                else if(link.category=="ANC coverage atleast 4 weeks" && link.year=="2001"){
-                    for(var i=0;i<plot.length;i++){
-                            plot[i].value = plot[i].IHME_4_visits_2001
-                            // delete(plot[i].IHME_4_visits_2000)
-                            // delete(plot[i].IHME_1_visits_2000)
-                            // delete(plot[i].IHME_1_visits_2001)
-                            }
-                    Highcharts.mapChart('contain', {
-                    chart: {
-                        map: 'countries/ng/ng-all'
-                    },
-
-                    credits: {
-                        enabled: false
-                    },
-
-                    title: {
-                        text: 'Map of Nigeria showing population growth'
-                    },
-
-                    subtitle: {
-                        text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/ng/ng-all.js">Nigeria</a>'
-                    },
-
-                    mapNavigation: {
-                        enabled: true,
-                        buttonOptions: {
-                            verticalAlign: 'bottom'
-                        }
-                    },
-
-                    colorAxis: {
-                        min: 1,
-                        max: 100,
-                        //type: 'logarithmic',
-                        minColor: '#efecf3',
-                        maxColor: '#990041'
-                    },
-
-                    series: [{
-                        data: plot,
-                        value: "Population",
-                        joinBy: ['hc-key', 'State'],
-                        name: link.category+ " in the year " + link.year,
-                        states: {
-                            hover: {
-                                color: '#fff'
-                            }
-                        },
-                        dataLabels: {
-                            enabled: true,
-                            format: '{point.name}'
-                        }
-                    }]
-                    });
-                }
                 
                 })
             }
